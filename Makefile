@@ -14,6 +14,14 @@ protoc: vendor
 		--go_out=. \
 		./proto/*.proto ./proto/nested/*.proto
 
+protoc-node:
+	cd proto/node ; yarn
+	./proto/node/node_modules/grpc-tools/bin/protoc.js \
+		--js_out=import_style=commonjs,binary:./proto/node/src \
+		--grpc_out=./proto/node/src \
+		-I . -I ./vendor/github.com/cosmos/gogoproto \
+		./proto/*.proto ./proto/nested/*.proto
+
 install:
 	go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 	go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
