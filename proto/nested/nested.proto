@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package foo.nested;
+
+option go_package = "github.com/dundee/grpc-dark-side/proto/nested";
+
+message Nested {
+    string name = 1;
+}

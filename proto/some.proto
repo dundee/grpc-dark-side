@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package foo;
+
+import "nested/nested.proto";
+
+option go_package = "github.com/dundee/grpc-dark-side/proto";
+
+message Some {
+    string name = 1;
+    foo.nested.Nested nested = 2;
+}
+
+service SomeService {
+    rpc GetSome (Some) returns (Some) {}
+}
