@@ -5,8 +5,9 @@ all: install protoc run
 run:
 	go run cmd/main.go
 
-protoc:
-	protoc -I . \
+protoc: vendor
+	protoc -I . -I ./vendor/github.com/cosmos/gogoproto \
+		--go_opt=Mgogoproto/gogo.proto=github.com/cosmos/gogoproto/gogoproto \
 		--go_opt=module=$(MODULE) \
 		--go-grpc_opt=module=$(MODULE) \
 		--go-grpc_out=. \
@@ -18,8 +19,11 @@ install:
 	go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 	go install github.com/fullstorydev/grpcui/cmd/grpcui@latest
 
+vendor:
+	go mod vendor
+
 call:
-	grpcurl -plaintext -proto ./proto/some.proto 127.0.0.1:5000 foo.SomeService/GetSome
+	grpcurl -plaintext 127.0.0.1:5000 foo.SomeService/GetSome
 
 ui:
 	grpcui -plaintext 127.0.0.1:5000

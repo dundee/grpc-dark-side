@@ -4,10 +4,12 @@ package foo;
 
 import "proto/nested/nested.proto";
 
+import "gogoproto/gogo.proto";
+
 option go_package = "github.com/dundee/grpc-dark-side/proto";
 
 message Some {
-    string name = 1;
+    string name = 1 [(gogoproto.nullable) = false];
     foo.nested.Nested nested = 2;
 }
 
