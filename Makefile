@@ -1,3 +1,5 @@
+MODULE=github.com/dundee/grpc-dark-side
+
 all: install protoc run
 
 run:
@@ -5,8 +7,8 @@ run:
 
 protoc:
 	protoc -I . \
-		--go_opt=paths=source_relative \
-		--go-grpc_opt=paths=source_relative \
+		--go_opt=module=$(MODULE) \
+		--go-grpc_opt=module=$(MODULE) \
 		--go-grpc_out=. \
 		--go_out=. \
 		./proto/*.proto ./proto/nested/*.proto
