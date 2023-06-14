@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package foo;
 
-import "nested/nested.proto";
+import "proto/nested/nested.proto";
 
 option go_package = "github.com/dundee/grpc-dark-side/proto";
 
